@@ -39,7 +39,7 @@ kill_timeout = 5
     timeout = "2s"
 
   [[services.script_checks]]
-    command = "sh /app/health_check.sh"
+    command = "chmod +x /app/health_check.sh; /app/health_check.sh"
     interval = 10000
     timeout = 1000
     restart_limit = 0
