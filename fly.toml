@@ -6,6 +6,9 @@ kill_timeout = 5
 
 [env]
 
+[processes]
+  app = "node app.js"
+
 [experimental]
   allowed_public_ports = []
   auto_rollback = true
@@ -34,6 +37,3 @@ kill_timeout = 5
     interval = "15s"
     restart_limit = 0
     timeout = "2s"
-  
-[processes]
-  app = "node app.js"
