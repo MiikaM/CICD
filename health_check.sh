@@ -1,4 +1,5 @@
 #!/bin/bash
+
 echo "Hello from shell script"
 
 HTMLCode=$(curl -s https://pokeindexcicd.fly.dev/health)
