@@ -8,8 +8,7 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
-env:
-  FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
+
 
 jobs:
   simple_tests:
@@ -31,12 +30,13 @@ jobs:
         uses: cypress-io/github-action@v5
         with:
           start: npm run start-prod
-
   deploy:
       name: Deploy app
       if: ${{ github.event_name == 'push' }}
       needs: simple_tests
       runs-on: ubuntu-latest
+      env:
+        FLY_API_TOKEN: ${{ secrets.FLY_API_TOKEN }}
       steps:
         - uses: actions/checkout@v3
         - uses: superfly/flyctl-actions/setup-flyctl@master
@@ -59,5 +59,3 @@ jobs:
           uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598      
           env:
             GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-
-    
