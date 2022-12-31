@@ -8,6 +8,9 @@ on:
     branches: [master]
     types: [opened, synchronize]
 
+env:
+  COMMIT_MESSAGES: ${{ contains(toJson(github.event.commits.*.message), "#skip") }}
+
 jobs:
   simple_tests:
     runs-on: ubuntu-20.04
@@ -50,10 +53,11 @@ jobs:
   tag-release:
     name: Tag release
     if: ${{ github.event_name == 'push' }}
-    needs: [simple_tests, deploy]
+    needs: [simple_tests]
     runs-on: ubuntu-20.04
     steps:
       - name: Bump version and push tag
-        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598      
+        uses: anothrNick/github-tag-action@eca2b69f9e2c24be7decccd0f15fdb1ea5906598
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          WITH_V: true
