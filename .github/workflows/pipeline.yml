@@ -83,9 +83,7 @@ jobs:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
           JOINED_MESSAGES: ${{ join(toJson(github.event.commits.*.message)) }}
           CONTAINS_SKIP: ${{ contains(join(toJson(github.event.commits.*.message)), '#skip') }}
-        run: echo "$COMMIT_MESSAGES"
-        run: echo "$JOINED_MESSAGES"
-        run: echo "$CONTAINS_SKIP"
+        run: echo "$COMMIT_MESSAGES"; echo "$JOINED_MESSAGES"; echo "$CONTAINS_SKIP"
       - name: head commit
         env:
           HEAD_COMMIT: ${{ toJson(github.event.commits.head_commit) }}
