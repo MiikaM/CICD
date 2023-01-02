@@ -3,7 +3,8 @@ name: Deployment pipeline
 on:
   push:
     branches:
-      - [master, keeping_green]
+      - master
+      - keeping_green
   pull_request:    
     branches: [master]
     types: [opened, synchronize]
