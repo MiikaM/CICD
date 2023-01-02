@@ -86,5 +86,5 @@ jobs:
         run: echo "$COMMIT_MESSAGES"; echo "$JOINED_MESSAGES"; echo "$CONTAINS_SKIP"
       - name: head commit
         env:
-          HEAD_COMMIT: ${{ toJson(github.event.commits.head_commit) }}
+          HEAD_COMMIT: ${{ toJson(github.event.head_commit) }}
         run: echo "$HEAD_COMMIT"
