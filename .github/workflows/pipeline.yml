@@ -60,7 +60,7 @@ jobs:
         with:
           fetch-depth: '0'
       - name: Skip
-        run: echo 'Do skip => $SKIP'
+        run: echo "Do skip => $SKIP"
       - name: Bump version and push tag
         uses: anothrNick/github-tag-action@1.36.0
         env:
@@ -82,3 +82,7 @@ jobs:
         env:
           COMMIT_MESSAGES: ${{ toJson(github.event.commits.head_commit.message) }}
         run: echo "$COMMIT_MESSAGES"
+      - name: head commit
+        env:
+          HEAD_COMMIT: ${{ toJson(github.event.commits.head_commit) }}
+        run: echo "$HEAD_COMMIT"
