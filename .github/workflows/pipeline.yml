@@ -51,8 +51,7 @@ jobs:
     name: Tag release
     env:
       COMMIT_MESSAGES: ${{ toJson(github.event.commits.*.message) }}
-      SKIP: ${{ contains(join(github.event.head_commit.message), '#skip') }}
-    if: ${{ github.event_name == 'push' && !$SKIP }}
+    if: ${{ github.event_name == 'push' && !contains(join(github.event.head_commit.message), '#skip') }}
     needs: [simple_tests]
     runs-on: ubuntu-20.04
     steps:
