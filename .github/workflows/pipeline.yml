@@ -5,7 +5,7 @@ on:
     branches:
       - master
   pull_request:    
-    branches: [master]
+    branches: [keeping_green]
     types: [opened, synchronize]
 
 jobs:
