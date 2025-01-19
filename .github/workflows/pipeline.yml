@@ -50,40 +50,26 @@ jobs:
   webhook:
     name: Send notification
     runs-on: ubuntu-20.04
+    env:
+      DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }} 
     needs: [simple_tests, deploy]
     if: ${{ always() && !cancelled() && github.event_name == 'push' }}
     steps:
       - name: Tests and build succeeded
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{ always() && contains(needs.simple_tests.result, 'success') && contains(needs.deploy.result, 'success') }}
+        uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9
+        if: ${{ always() && contains(needs.tests.result, 'success') && contains(needs.deploy.result, 'success') }}
         with:
-            severity: success
-            username: CICD Bot
-            description: A new version of the application has been deployed.
-            color: '#4BB543'
-            text: Tests and deployment succeeded .
-            details: "The deployed application is available at ${{ secrets.FLY_APP_URI }} by ${{ github.actor }}"
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}     
+          args: "Tests and deployment succeeded for ${{ github.repository }} by ${{ github.actor }}"
       - name: Deployment failed
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{ always() && contains(needs.deploy.result, 'failure') && contains(needs.simple_tests.result, 'success') }}
+        uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9
+        if: ${{ always() && contains(needs.deploy.result, 'failure') && contains(needs.tests.result, 'success') }}
         with:
-            severity: error
-            username: CICD Bot
-            color: '#DDDDDD'
-            text: App deployment failed.
-            details: Something wrong with the deployment process. The application was not deployed!
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: "Deployment failed for ${{ github.repository }} by ${{ github.actor }}"
       - name: Tests failed
-        uses: rjstone/discord-webhook-notify@v1
-        if: ${{ always() && contains(needs.simple_tests.result, 'failure')}}
+        uses: Ilshidur/action-discord@0c4b27844ba47cb1c7bee539c8eead5284ce9fa9
+        if: ${{ always() && contains(needs.tests.result, 'failure')}}
         with:
-            severity: error
-            username: CICD Bot
-            color: '#DB0F13'
-            text: Tests and build failed.
-            details: Workflow failed application was not deployed
-            webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
+          args: "Tests failed for ${{ github.repository }} by ${{ github.actor }}"
   tag-release:
     name: Tag release
     env:
