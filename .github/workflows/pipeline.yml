@@ -72,7 +72,6 @@ jobs:
             severity: error
             username: CICD Bot
             color: '#DDDDDD'
-            avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
             text: App deployment failed.
             details: Something wrong with the deployment process. The application was not deployed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
@@ -83,7 +82,6 @@ jobs:
             severity: error
             username: CICD Bot
             color: '#DB0F13'
-            avatarUrl: https://github.githubassets.com/images/modules/logos_page/Octocat.png
             text: Tests and build failed.
             details: Workflow failed application was not deployed
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
