@@ -61,7 +61,6 @@ jobs:
             username: CICD Bot
             description: A new version of the application has been deployed.
             color: '#4BB543'
-            avatarUrl: https://avatars.githubusercontent.com/u/583231?v=4
             text: Tests and deployment succeeded .
             details: "The deployed application is available at ${{ secrets.FLY_APP_URI }} by ${{ github.actor }}"
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}     
