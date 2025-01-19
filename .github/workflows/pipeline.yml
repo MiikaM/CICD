@@ -58,7 +58,7 @@ jobs:
         if: ${{ always() && contains(needs.simple_tests.result, 'success') && contains(needs.deploy.result, 'success') }}
         with:
             severity: success
-            details: "The deployed application is available at ${{ secrets.FLY_APP_URI }} by ${{ github.actor }}"
+            details: "The deployed application is available at by ${{ github.actor }}"
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}     
       - name: Deployment failed
         uses: rjstone/discord-webhook-notify@v1
