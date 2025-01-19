@@ -58,13 +58,20 @@ jobs:
         if: ${{ always() && contains(needs.simple_tests.result, 'success') && contains(needs.deploy.result, 'success') }}
         with:
             severity: success
-            details: "The deployed application is available at by ${{ github.actor }}"
+            username: CICD Bot
+            description: A new version of the application has been deployed.
+            color: '#4BB543'
+            text: Tests and deployment succeeded .
+            details: "The deployed application is available at ${{ secrets.FLY_APP_URI }} by ${{ github.actor }}"
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}     
       - name: Deployment failed
         uses: rjstone/discord-webhook-notify@v1
         if: ${{ always() && contains(needs.deploy.result, 'failure') && contains(needs.simple_tests.result, 'success') }}
         with:
             severity: error
+            username: CICD Bot
+            color: '#DDDDDD'
+            text: App deployment failed.
             details: Something wrong with the deployment process. The application was not deployed!
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
       - name: Tests failed
@@ -72,6 +79,9 @@ jobs:
         if: ${{ always() && contains(needs.simple_tests.result, 'failure')}}
         with:
             severity: error
+            username: CICD Bot
+            color: '#DB0F13'
+            text: Tests and build failed.
             details: Workflow failed application was not deployed
             webhookUrl: ${{ secrets.DISCORD_WEBHOOK }}
   tag-release:
