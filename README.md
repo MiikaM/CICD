@@ -1,15 +1,6 @@
-# Full Stack open CI/CD
+# Full Stack open CI/CD by Miika Mikkonen
 
 Update to this repository is used for the CI/CD module of the Full stack open course
 
-Fork the repository to complete course exercises
+The parts 20-21 are found from the repository [CICD_part20-21](https://github.com/MiikaM/CICD_part20-21)
 
-## Commands
-
-Start by running `npm install` inside the project folder
-
-`npm start` to run the webpack dev server
-`npm test` to run tests
-`npm run eslint` to run eslint
-`npm run build` to make a production build
-`npm run start-prod` to run your production build
